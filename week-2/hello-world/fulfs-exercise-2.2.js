@@ -1,4 +1,4 @@
-var express = require('express'); //add express file name
+var express = require('express'); //add express library name
 var http = require('http'); //add http to start server
 
 var app = express(); //add for the express app
