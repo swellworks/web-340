@@ -1,7 +1,7 @@
-var express = require('express'); //add express 
-var http = require('http'); //add http
+var express = require('express'); //add express file name
+var http = require('http'); //add http to start server
 
-var app = express();
+var app = express(); //add for the express app
 
 
 app.use(function(req, res)
