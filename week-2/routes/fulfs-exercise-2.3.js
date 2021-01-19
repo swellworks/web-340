@@ -4,13 +4,13 @@ var http = require('http');
 var app = express();
 
 // routes 
-app.get('/', function(){
+app.get('/', function(req, res){
     res.end('Welcome to the homepage.\n');
 });
 
 app.get('/about', function(req, res)
 {
-    res.end('Welcome to the homepage.\n');
+    res.end('Welcome to the about.\n');
 });
 
 app.get('/contact', function(req, res)
