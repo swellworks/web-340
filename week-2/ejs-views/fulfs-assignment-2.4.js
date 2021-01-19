@@ -5,11 +5,7 @@ var app = express(); //add for the express app
 
 var path = require("path");
 
-app.set("ejs-views", path.resolve(__dirname, "ejs-views")); // Tell Express the views are in the 'ejs-views' directory
-
-app.set("ejs-views engine", "ejs"); // Tell Express to use the EJS view engine
-
-app.get("/", function(request, response) {
+app.get("/", function(req, res) {
 
     response.render("index.ejs", {
 
@@ -20,6 +16,12 @@ app.get("/", function(request, response) {
    });
 
 });
+
+app.set("ejs-views", path.resolve(__dirname, "ejs-views")); // Tell Express the views are in the 'ejs-views' directory
+
+app.set("ejs-views engine", "ejs"); // Tell Express to use the EJS view engine
+
+
 
 http.createServer(app).listen(8080, function() {
 
