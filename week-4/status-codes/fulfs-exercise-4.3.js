@@ -30,7 +30,7 @@ app.get('/not-found', function(request, response){
 app.get('/ok', function(request, response){
     response.status(200);
     response.json({
-        message: "Page loaded correctly."
+        message: "Awesonme, page loaded correctly!"
     })
 });
 
@@ -42,6 +42,6 @@ app.get('/not-implemented', function(request, response){
 });
 
 http.createServer(app).listen(8080, function(){
-    console.log("Application started on port 8080!");
+    console.log("Hey man, the app started on port 3000!");
 
 });
