@@ -8,9 +8,9 @@
 ;===========================================
 */ 
 
-// var header = require('../fulfs-header.js'); // added file from root directory
+var header = require('../fulfs-header.js'); // added file from root directory
 
-// console.log(header.display("Perry", "Fulfs", "Exercise 4.2")); // updated content with actual name & assignment name
+console.log(header.display("Perry", "Fulfs", "Exercise 4.2")); // updated content with actual name & assignment name
 
 // start program // 
 
@@ -19,6 +19,8 @@ var express = require("express");
 var http = require("http");
 
 var app = express();
+
+var logger = require("morgan");
 
 app.use(logger('dev'));
 
