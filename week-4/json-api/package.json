@@ -1,0 +1,12 @@
+{
+  "firstName": "Perry",
+  "lastName": "Fulfs",
+  "email": "domainname@gmail.com",
+  "address": "555 main street",
+  "city": "Omaha",
+  "state": "Nebraska",
+  "zip": "68123",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
