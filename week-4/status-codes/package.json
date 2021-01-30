@@ -1,0 +1,8 @@
+{
+    "name": "http-status-codes",
+    "author": "Perry Fulfs",
+    "private": true,
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
