@@ -1,23 +1,17 @@
-// header.ejs
+header.ejs
 
 <!doctype html>
 
-<html lang="en">
-    <head>
+<head>
+  <meta charset="utf-8">
 
-    <meta charset="utf-8">
+  <title><%= title %><</title>
 
-    viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+  crossorigin="anonymous">
 
-     <title><%= title %></title>
-
-   
-
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
-     crossorigin="anonymous">
-
-    </head>
+</head>
 
 navbar.ejs
 
@@ -26,26 +20,18 @@ navbar.ejs
     <ul class="navbar-nav">
 
         <li class="nav-item active">
-
-            nav-link" href="#">Home
-
-        li>
-
+            <a href="#" class="nav-link">Home</a>
+        </li>
         <li class="nav-item">
-
-            nav-link" href="#">About
-
-        li>
-
+            <a href="#" class="nav-link">About</a>
+        </li>
         <li class="nav-item">
+            <a href="#" class="nav-link">Contact Us</a>
+        </li>
 
-            nav-link" href="#">Contact Us
+    </ul>
 
-        li>
-
-    ul>
-
-nav>
+</nav>
 
 footer.ejs
 
@@ -59,7 +45,7 @@ footer.ejs
 
 scripts.ejs
 
-<!-- Scripts -->
+<!-- scripts -->
 
 app.js
 
@@ -95,4 +81,3 @@ http.createServer(app).listen(8080, function() {
 
 });
 
-</html>
