@@ -1,0 +1,9 @@
+{
+    "name": "tdd-test-case",
+    "author": "Perry Fulfs",
+    "private": true,
+    "dependencies": {
+        "chai": "^4.3.0",
+        "mocha": "^8.3.0"
+    }
+}
