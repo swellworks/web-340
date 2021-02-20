@@ -18,14 +18,25 @@ app.get("/", function (request, response) {
 
     response.render("index", {
 
-        title: "Home page"
+        title: "Landing Page"
 
     });
 
 });
 
-http.createServer(app).listen(8000, function() {
+app.get("/new", function (request, response) {
 
-    console.log("Application started on port 8000!");
+    response.render("new", {
+
+        title: "New Page"
+
+    });
+
+});
+
+http.createServer(app).listen(3300, function() {
+
+    
+    console.log("Application started on port 3300!");
 
 });
