@@ -34,9 +34,9 @@ app.get("/new", function (request, response) {
 
 });
 
-http.createServer(app).listen(3300, function() {
+http.createServer(app).listen(8080, function() {
 
     
-    console.log("Application started on port 3300!");
+    console.log("Application started on port 8080!");
 
 });
