@@ -1,3 +1,13 @@
+header.ejs
+
+navbar.ejs
+
+footer.ejs
+
+scripts.ejs
+
+app.js
+
 var express = require("express");
 
 var http = require("http");
@@ -24,8 +34,8 @@ app.get("/", function (request, response) {
 
 });
 
-http.createServer(app).listen(8000, function() {
+http.createServer(app).listen(3000, function() {
 
-    console.log("Application started on port 8000!");
+    console.log("Application started on port 3000!");
 
 });
