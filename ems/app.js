@@ -1,63 +1,13 @@
-header.ejs
-<head>
+<%- include('header') -%>
 
-    charset="UTF-8">
+<%- include('navbar') -%>
 
-    viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%- include('footer') -%>
 
-     <title><%= title %></title>
+<%- include('scripts') -%>
 
-   
 
-    stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-</head>
-
-navbar.ejs
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-    <ul class="navbar-nav">
-
-        <li class="nav-item active">
-
-            nav-link" href="#">Home
-
-        li>
-
-        <li class="nav-item">
-
-            nav-link" href="#">About
-
-        li>
-
-        <li class="nav-item">
-
-            nav-link" href="#">Contact Us
-
-        li>
-
-    ul>
-
-nav>
-
-footer.ejs
-
-<hr>
-
-<footer>
-
-    <p>© Company 2017</p>
-
-</footer>
-
-scripts.ejs
-
-<!-- Scripts -->
-
-app.js
+// <!-- Scripts -->
 
 var express = require("express");
 
