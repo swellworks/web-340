@@ -34,16 +34,16 @@ app.get("/", function(req, res) {
 
 // list page
 app.get("/", function(req, res) {
-    res.render('/list');
+    res.render('list');
 });
 
 // new page
-app.get('/new', function(req, res) {
+app.get('/', function(req, res) {
     res.render('/new');
 });
 
-http.createServer(app).listen(8000, function() {
+http.createServer(app).listen(3000, function() {
 
-    console.log("Application started on port 8000!");
+    console.log("Application started on port 3000!");
 
 });
