@@ -21,9 +21,9 @@ var app = express();
 
 app.set("views", path.resolve(__dirname, "views"));
 
-app.set("view engine", "ejs");
-
 app.use(logger("short"));
+
+app.set("view engine", "ejs");
 
 // index page
 app.get("/", function(req, res) {
@@ -33,17 +33,15 @@ app.get("/", function(req, res) {
 });
 
 // list page
-app.get("/", function(req, res) {
-    res.render('list');
+app.get("/list", function(req, res) {
+    res.render('../list.ejs');
 });
 
 // new page
-app.get('/', function(req, res) {
-    res.render('/new');
+app.get('/new', function(req, res) {
+    res.render('../new.ejs');
 });
 
-http.createServer(app).listen(3000, function() {
-
-    console.log("Application started on port 3000!");
-
+http.createServer(app).listen(8080, function() {
+    console.log("Application started on port 8080!");
 });
