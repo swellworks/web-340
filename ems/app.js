@@ -1,10 +1,10 @@
-<%- include('header') -%>
+// <%- include('header') -%>
 
-<%- include('navbar') -%>
+// <%- include('navbar') -%>
 
-<%- include('footer') -%>
+// <%- include('footer') -%>
 
-<%- include('scripts') -%>
+// <%- include('scripts') -%>
 
 
 // <!-- Scripts -->
@@ -25,14 +25,20 @@ app.set("view engine", "ejs");
 
 app.use(logger("short"));
 
-app.get("/", function (request, response) {
-
-    response.render("index", {
-
+app.get("/", function (req, res) {
+    res.render("index", {
         title: "Home page"
-
     });
+});
 
+app.get("/list", function (req, res) {
+    res.render("list");
+});
+
+app.get("/new", function (req, res) {
+    res.render("new", {
+        title: "New Page"
+    });
 });
 
 http.createServer(app).listen(8080, function() {
