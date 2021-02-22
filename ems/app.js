@@ -46,6 +46,6 @@ app.get('/new', function(req, res) {
     });
 });
 
-http.createServer(app).listen(3100, function() {
-    console.log("Application started on port 3100!");
+http.createServer(app).listen(3200, function() {
+    console.log("Application started on port 3200!");
 });
