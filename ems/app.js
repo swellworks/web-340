@@ -28,20 +28,24 @@ app.set("view engine", "ejs");
 // index page
 app.get("/", function(req, res) {
     res.render("index", {
-        title: "Home page"
+        title: "HOME PAGE"
     });
 });
 
 // list page
 app.get("/list", function(req, res) {
-    res.render('../list.ejs');
+    res.render('list.ejs', {
+        title: "LIST PAGE"
+    });
 });
 
 // new page
 app.get('/new', function(req, res) {
-    res.render('../new.ejs');
+    res.render('new.ejs', {
+        title: "NEW PAGE"
+    });
 });
 
-http.createServer(app).listen(8080, function() {
-    console.log("Application started on port 8080!");
+http.createServer(app).listen(3100, function() {
+    console.log("Application started on port 3100!");
 });
