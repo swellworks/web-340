@@ -13,23 +13,46 @@ var express = require("express");
 
 var http = require("http");
 
+var logger = require("morgan");
+
+var helmet = require("helmet");
+
 var path = require("path");
 
-var logger = require("morgan");
+// initialize express
 
 var app = express();
 
-app.set("views", path.resolve(__dirname, "views"));
+// use statements
 
 app.use(logger("short"));
 
+app.use(helmet.xssFilter());
+
+// set statements
+
+app.set("views", path.resolve(__dirname, "views"));
+
 app.set("view engine", "ejs");
 
+// http calls
+
 // index page
+
+// app.get("/", function(req, res) {
+//     res.render("index", {
+//         title: "HOME PAGE"
+//     });
+// });
+
 app.get("/", function(req, res) {
+
     res.render("index", {
-        title: "HOME PAGE"
+
+        message: "XSS Prevention Example"
+
     });
+
 });
 
 // list page
@@ -46,6 +69,9 @@ app.get('/new', function(req, res) {
     });
 });
 
-http.createServer(app).listen(3200, function() {
-    console.log("Application started on port 3200!");
+// create/start Node server
+
+http.createServer(app).listen(8080, function() {
+    console.log("Application started on port 8080!");
+
 });
