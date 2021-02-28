@@ -90,6 +90,20 @@ app.get("/list", function(req, res) {
     });
 });
 
+// mongoose find all example
+
+app.get("/list", function(request, response) {
+    Fruit.find({}, function(error, fruits) {
+       if (error) throw error;
+       response.render("list", {
+           title: "Fruit List",
+           fruits: fruits
+       });
+    });
+});
+
+
+
 // new page
 app.get('/new', function(req, res) {
     res.render('new.ejs', {
