@@ -1,10 +1,4 @@
-// <%- include('header') -%>
 
-// <%- include('navbar') -%>
-
-// <%- include('footer') -%>
-
-// <%- include('scripts') -%>
 
 
 // <!-- Scripts -->
@@ -19,6 +13,16 @@ var helmet = require("helmet");
 
 var path = require("path");
 
+var bodyParser = require("body-parser");
+
+var cookieParser = require("cookie-parser");
+
+var csrf = require("csurf");
+
+// setup csrf protection
+
+var csrfProtection = csrf({cookie: true});
+
 // initialize express
 
 var app = express();
@@ -29,21 +33,37 @@ app.use(logger("short"));
 
 app.use(helmet.xssFilter());
 
+app.use(bodyParser.urlencoded({
+
+    extended: true
+
+}));
+
+app.use(cookieParser());
+
+app.use(csrfProtection);
+
+app.use(function(request, response, next) {
+
+    var token = request.csrfToken();
+
+    response.cookie('XSRF-TOKEN', token);
+
+    response.locals.csrfToken = token;
+
+    next();
+
+});
+
+
 // set statements
 
 app.set("views", path.resolve(__dirname, "views"));
 
 app.set("view engine", "ejs");
 
-// http calls
 
-// index page
-
-// app.get("/", function(req, res) {
-//     res.render("index", {
-//         title: "HOME PAGE"
-//     });
-// });
+// routing 
 
 app.get("/", function(req, res) {
 
@@ -52,6 +72,14 @@ app.get("/", function(req, res) {
         message: "XSS Prevention Example"
 
     });
+
+});
+
+app.post("/process", function(req, res) {
+
+    console.log(req.body.txtName);
+
+    res.redirect("/");
 
 });
 
