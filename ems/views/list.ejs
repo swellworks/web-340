@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+  <title><%= title%></title>
 </head>
 <body class="container">
 
@@ -19,6 +19,27 @@
         <h2>Best Practices for Employee Personnel Files</h2>
     </div>
 </main>
+
+<% if (fruits.length) { %>
+  <h2>‐‐ Fruit Listing ‐‐</h2><br />
+  <a href="/new">Add New</a>
+  <table class="table table‐hover">
+      <thead class="thead‐dark">
+      <tr>
+          <th>Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% fruits.forEach(function (entry) { %>
+      <tr>
+          <td><%= entry.name %></td>
+      </tr>
+      </tbody>
+      <% }) %>
+  </table>
+  <% } else { %>
+  No entries! <a href="/new">Add one!</a>
+  <% } %>
 
 <table class="table table-striped">
     <thead>
@@ -50,6 +71,8 @@
       </tr>
     </tbody>
   </table>
+
+  
 
 
 <footer>

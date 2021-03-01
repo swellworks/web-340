@@ -77,32 +77,42 @@ app.get("/", function(req, res) {
 
 app.post("/process", function(req, res) {
 
-    console.log(req.body.txtName);
+    // console.log(request.body.txtName);
+ 
+    if (!req.body.txtName) {
+ 
+        res.status(400).send("Entries must have a name");
+ 
+        return;
+ 
+    }
 
-    res.redirect("/");
-
-});
+// app.post("/process", function(req, res) {
+//     console.log(req.body.txtName);
+//     res.redirect("/");
+// });
+// OLD PROCESS - REFERENCE
 
 // list page
+
 app.get("/list", function(req, res) {
-    res.render('list.ejs', {
-        title: "LIST PAGE"
-    });
-});
-
-// mongoose find all example
-
-app.get("/list", function(request, response) {
-    Fruit.find({}, function(error, fruits) {
+    Employee.find({}, function(error, fruits) {
        if (error) throw error;
-       response.render("list", {
-           title: "Fruit List",
+       res.render("list", {
+           title: "Employee List",
            fruits: fruits
        });
     });
 });
 
+// app.get("/list", function(req, res) {
+//     res.render('list.ejs', {
+//         title: "LIST PAGE"
+//     });
+// });
+// OLD LIST - REFERENCE
 
+// mongoose find all example
 
 // new page
 app.get('/new', function(req, res) {
