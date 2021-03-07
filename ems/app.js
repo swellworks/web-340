@@ -25,10 +25,9 @@ var csrfProtection = csrf({cookie: true});
 var app = express();
 
 //establish database connections
-var mongoDB = "mongodb+srv://swellworks:8tr@ck@cluster0.nclbl.mongodb.net/https://cloud.mongodb.com/v2/6024aa973e554d7cd8fe6951#metrics/host/4679c71ff2c0f04a646030a40920ec2e/status?retryWrites=true&w=majority";
-mongoose.connect(mongoDB, {
-    useMongoClient: true
-});
+var mongoDB = "mongodb+srv://pfulfs:bLackB1rd@buwebdev-cluster-1.nclbl.mongodb.net/test";
+
+mongoose.connect(mongoDB,{useNewUrlParser:true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connected error: "));
@@ -52,7 +51,8 @@ app.use(function (request, response, next) {
     next();
 });
 app.use(express.static(__dirname + '/public'));
-app.use(helmet.xssFilter());
+
+
 
 
 //setting view engine
@@ -149,6 +149,6 @@ app.post("/process", function (req, res) {
 })
 
 // create/start Node server
-http.createServer(app).listen(3005, function() {
-    console.log("Application started on port 3005!");
+http.createServer(app).listen(3008, function() {
+    console.log("Application started on port 3008!");
 });
