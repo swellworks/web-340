@@ -1,18 +1,22 @@
+/*
+============================================
+; Title:  EMS 
+; Author: Perry Fulfs
+; Date:   28 February 2019
+; Description: EJS layouts
+;===========================================
+*/
+
 // require statements
 var express = require("express");
-
 var http = require("http");
-
 var path = require("path");
-
 var logger = require("morgan");
-
 var bodyParser = require("body-parser");
-
 var cookieParser = require("cookie-parser");
-
 var csrf = require("csurf");
-
+var Employee = require("./models/employee");
+var mongoose = require("mongoose");
 
 // setup csrf protection
 var csrfProtection = csrf({cookie: true});
@@ -20,112 +24,129 @@ var csrfProtection = csrf({cookie: true});
 // initialize express
 var app = express();
 
+//establish database connections
+var mongoDB = "mongodb+srv://swellworks:8tr@ck@cluster0.nclbl.mongodb.net/https://cloud.mongodb.com/v2/6024aa973e554d7cd8fe6951#metrics/host/4679c71ff2c0f04a646030a40920ec2e/status?retryWrites=true&w=majority";
+mongoose.connect(mongoDB, {
+    useMongoClient: true
+});
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connected error: "));
+db.once("open", function () {
+    console.log("Application connected to MongoDB")
+});
+
 
 // use statements
 app.use(logger("short"));
-
 app.use(bodyParser.urlencoded({
-
     extended: true
-
-}));
-
+    })
+);
 app.use(cookieParser());
-
 app.use(csrfProtection);
-
-app.use(function(request, response, next) {
-
+app.use(function (request, response, next) {
     var token = request.csrfToken();
-
-    response.cookie('XSRF-TOKEN', token);
-
+    response.cookie("XSRF-TOKEN", token);
     response.locals.csrfToken = token;
-
     next();
-
 });
+app.use(express.static(__dirname + '/public'));
+app.use(helmet.xssFilter());
 
-// not sure if supposed to keep this one?
-// app.use(helmet.xssFilter());
 
-
-// set statements
+//setting view engine
 app.set("views", path.resolve(__dirname, "views"));
-
 app.set("view engine", "ejs");
+app.set('port', process.env.PORT || 8080);
 
-
+//routing
 // START EJS PAGES
 // ----------------------------------------------
 
-// index page
-app.get("/", function(req, res) {
-    res.render("index", {
-        title: "Home Page",
-        message: "New Employee Entry Page"
+// rendering index page
+app.get("/", function (req, res) {
+    Employee.find({}, function (err, employees) {
+        if (err) {
+            console.log(err)
+            throw err;
+        } else {
+            console.log(employees);
+            res.render('index', {
+                title: 'EMS|Home',
+                employees: employees
+            })
+        }
     });
 });
 
-// list page
-app.get("/list", function(req, res) {
-    Employee.find({}, function(error, employees) {
-       if (error) throw error;
-       res.render("list", {
-           title: "Employee List",
-           employees: employees
-       });
+// rendering list page
+app.get("/list", function (req, res) {
+    Employee.find({}, function (error, employees) {
+        if (error) throw error;
+        res.render("list", {
+            title: 'Employee List',
+            employee: employees
+        })
+    })
+})
+
+// rendering new page
+app.get("/new", function (req, res) {
+    res.render("new", {
+        title: 'EMS|New'
     });
 });
 
 
-// app.get('/list', function(req, res) {
-//     res.render('list.ejs', {
-//         title: "List Page",
-//         message: "List Page"
+// rendering view page
+app.get("/view/:queryName", function (req, res) {
+    var queryName = req.params['queryName']
+     Employee.find({'name': queryName}, function (err, employees) {
+         if (err) {
+             console.log(err);
+         } else {
+             console.log(employees)
+             if (employees.length > 0) {
+                 res.render("view", {
+                     title: 'EMS | View',
+                     employee:employees
+                 })
+             } else {
+                 res.redirect('/')
+             }
+         }
+     })
+ })
+
+// app.get('/view', function(req, res) {
+//     res.render('view.ejs', {
+//         title: "View Page",
+//         message: "View Page"
 //     });
 // });
 
-// new page
-app.get('/new', function(req, res) {
-    res.render('new.ejs', {
-        title: "New Page",
-        message: "New Page"
-    });
-});
-
-// view page
-app.get('/view', function(req, res) {
-    res.render('view.ejs', {
-        title: "View Page",
-        message: "View Page"
-    });
-});
-
-// post
-app.post("/process", function(req, res) {
-    // console.log(request.body.txtName);
-    if (!req.body.txtName) {
-        res.status(400).send("Entries must have a name");
-        return;
-    }
-
-    // get the request's form data
-    var employeeName = request.body.txtName;
-    console.log(employeeName);
- 
-    // create a fruit model
-    var employee = new Employee({
+// rendering post
+app.post("/process", function (req, res) {
+    //get requests data 
+    const employeeName = req.body.txtName;
+    console.log(employeeName)
+    //employee model
+    let employee = new Employee({
         name: employeeName
     });
- 
-    // save
-    fruit.save(function (error) {
-        if (error) throw error;
-        console.log(employeeName + " saved successfully!");
+    //save employee
+    employee.save(function (err) {
+        if (err) {
+            console.log(err);
+            throw err;
+        } else {
+            console.log(employeeName + " saved successfully!");
+            res.redirect('/')
+        }
     });
-    response.redirect("/");
- });
+
+})
 
 // create/start Node server
 http.createServer(app).listen(3005, function() {
