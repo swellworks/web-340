@@ -4,23 +4,23 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-// define the fruitSchema
+// define the employeeSchema
 
-var fruitSchema = new Schema({
+var employeeSchema = new Schema({
 
     name: String
 
 });
 
-// define the fruit model
+// define the employee model
 
-var Fruit = mongoose.model("Fruit", fruitSchema);
+var Employee = mongoose.model("Employee", employeeSchema);
 
-// expose the fruit to calling files
+// expose the employee to calling files
 
-module.exports = Fruit;
+module.exports = Employee;
 
-Using the Model
+// Using the Model
 
 var express = require("express");
 
@@ -28,15 +28,14 @@ var http = require("http");
 
 var mongoose = require("mongoose");
 
-
 var logger = require("morgan");
 
 
-var Fruit = require("./models/fruit");
+var Employee = require("ems/models/employee");
 
 // mLab connection
 
-var mongoDB = "<mLab connection string>";
+var mongoDB = "mongodb+srv://swellworks:8tr@ck@cluster0.nclbl.mongodb.net/https://cloud.mongodb.com/v2/6024aa973e554d7cd8fe6951#metrics/host/4679c71ff2c0f04a646030a40920ec2e/status?retryWrites=true&w=majority";
 
 mongoose.connect(mongoDB, {
 
@@ -64,16 +63,17 @@ app.use(logger("short"));
 
 // model
 
-var fruit = new Fruit({
+var employee = new Employee({
 
-    name: "Apple"
+    firstName: "Doug",
+    lastName: "Giblets"
 
 });
 
 // create server
 
-http.createServer(app).listen(8080, function() {
+http.createServer(app).listen(3003, function() {
 
-    console.log("Application started on port 8080!");
+    console.log("Application started on port 3003!");
 
 });
