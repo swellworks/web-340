@@ -1,5 +1,4 @@
-// variable app scripts
-
+// require statements
 var express = require("express");
 
 var http = require("http");
@@ -8,38 +7,72 @@ var path = require("path");
 
 var logger = require("morgan");
 
+var bodyParser = require("body-parser");
+
+var cookieParser = require("cookie-parser");
+
+var csrf = require("csurf");
+
+
+// setup csrf protection
+var csrfProtection = csrf({cookie: true});
+
+// initialize express
 var app = express();
 
+
+// use statements
+app.use(logger("short"));
+
+app.use(bodyParser.urlencoded({
+
+    extended: true
+
+}));
+
+app.use(cookieParser());
+
+app.use(csrfProtection);
+
+app.use(function(request, response, next) {
+
+    var token = request.csrfToken();
+
+    response.cookie('XSRF-TOKEN', token);
+
+    response.locals.csrfToken = token;
+
+    next();
+
+});
+
+// not sure if supposed to keep this one?
+// app.use(helmet.xssFilter());
+
+
+// set statements
 app.set("views", path.resolve(__dirname, "views"));
 
 app.set("view engine", "ejs");
 
-app.use(logger("short"));
 
 // START EJS PAGES
 // ----------------------------------------------
 
 // index page
-app.get("/", function (request, response) {
-
-    response.render("index", {
-
-        title: "Home page"
-
+app.get("/", function(req, res) {
+    res.render("index", {
+        title: "Home Page",
+        message: "New Employee Entry Page"
     });
+});
+
+app.post("/process", function(req, res) {
+    console.log(req.body.txtName);
+    res.redirect("/");
 
 });
 
-// list page
-// app.get("/list", function(req, res) {
-//     Employee.find({}, function(error, employees) {
-//        if (error) throw error;
-//        res.render("list", {
-//            title: "Employee List",
-//            employees: employees
-//        });
-//     });
-// });
 
 // list page
 app.get('/list', function(req, res) {
@@ -65,8 +98,7 @@ app.get('/view', function(req, res) {
     });
 });
 
-http.createServer(app).listen(8002, function() {
-
-    console.log("Application started on port 8002!");
-
+// create/start Node server
+http.createServer(app).listen(3004, function() {
+    console.log("Application started on port 3004!");
 });
