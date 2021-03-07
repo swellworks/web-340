@@ -31,7 +31,7 @@ var mongoose = require("mongoose");
 var logger = require("morgan");
 
 
-var Employee = require("ems/models/employee");
+var Employee = require("ems/models/employee.js");
 
 // mLab connection
 
