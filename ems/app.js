@@ -31,18 +31,42 @@ app.get("/", function (request, response) {
 });
 
 // list page
-app.get("list", function(req, res) {
-    Employee.find({}, function(error, employees) {
-       if (error) throw error;
-       res.render("list", {
-           title: "Employee List",
-           employees: employees
-       });
+// app.get("/list", function(req, res) {
+//     Employee.find({}, function(error, employees) {
+//        if (error) throw error;
+//        res.render("list", {
+//            title: "Employee List",
+//            employees: employees
+//        });
+//     });
+// });
+
+// list page
+app.get('/list', function(req, res) {
+    res.render('list.ejs', {
+        title: "List Page",
+        message: "List Page"
     });
 });
 
-http.createServer(app).listen(3002, function() {
+// new page
+app.get('/new', function(req, res) {
+    res.render('new.ejs', {
+        title: "New Page",
+        message: "New Page"
+    });
+});
 
-    console.log("Application started on port 3002!");
+// view page
+app.get('/view', function(req, res) {
+    res.render('view.ejs', {
+        title: "View Page",
+        message: "View Page"
+    });
+});
+
+http.createServer(app).listen(8002, function() {
+
+    console.log("Application started on port 8002!");
 
 });
