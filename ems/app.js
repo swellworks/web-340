@@ -149,6 +149,6 @@ app.post("/process", function (req, res) {
 })
 
 // create/start Node server
-http.createServer(app).listen(3008, function() {
-    console.log("Application started on port 3008!");
+http.createServer(app).listen(8002, function() {
+    console.log("Application started on port 8002!");
 });
