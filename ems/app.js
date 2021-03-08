@@ -147,8 +147,3 @@ app.post("/process", function (req, res) {
     });
 
 })
-
-// create/start Node server
-// http.createServer(app).listen(8005, function() {
-//     console.log("Application started on port 8005!");
-// });
