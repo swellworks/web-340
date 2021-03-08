@@ -53,8 +53,10 @@ app.use(function (request, response, next) {
 app.use(express.static(__dirname + '/public'));
 
 
+
+
 //setting view engine
-app.set('views', path.join(__dirname, 'views'))
+app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
 app.set('port', process.env.PORT || 8080);
 
@@ -147,6 +149,6 @@ app.post("/process", function (req, res) {
 })
 
 // create/start Node server
-http.createServer(app).listen(8005, function() {
-    console.log("Application started on port 8005!");
+http.createServer(app).listen(8002, function() {
+    console.log("Application started on port 8002!");
 });
