@@ -119,13 +119,6 @@ app.get("/view/:queryName", function (req, res) {
      })
  })
 
-// app.get('/view', function(req, res) {
-//     res.render('view.ejs', {
-//         title: "View Page",
-//         message: "View Page"
-//     });
-// });
-
 // rendering post
 app.post("/process", function (req, res) {
     //get requests data 
